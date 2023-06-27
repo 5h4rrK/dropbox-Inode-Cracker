@@ -31,8 +31,8 @@ def get_versioned_key(CLIENT_KEY_NAME, hmac_key,start,end,size,dropbox_path=drop
     for i in range(start, end):
         payload_ = decrypt_the_payload(raw_payload, i)
         padding  = payload_[-1] 
-        payload_ = payload_[: - padding].decode('utf-8',errors='ignore').lower()
-        if 'client' in payload_: 
+        payload_ = payload_[: - padding]
+        if b'Client'  in payload_ or b'client' in payload_: 
             print(payload_)
             print("Inode Number :: ", i)
             open("inode_number",'w').write(str(i))
